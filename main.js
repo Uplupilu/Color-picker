@@ -1,11 +1,17 @@
-// Получаем контейнеры
-const listEl = document.getElementById("thread-list");
-const selectionEl = document.getElementById("selection");
+// main.js
+
+// Данные нитей из colors.js
+// const threads = [ ... ];
+
+// Контейнеры
+const listEl       = document.getElementById("thread-list");
+const selectionEl  = document.getElementById("selection");
+const addThreadBtn = document.getElementById("add-thread-btn");
 
 // Массив для выбранных нитей
 let selected = [];
 
-// Рендерим все нитки
+// Функция рендера списка нитей
 function renderThreads() {
   listEl.innerHTML = "";
   threads.forEach((thread, index) => {
@@ -32,7 +38,7 @@ function renderThreads() {
   });
 }
 
-// Рендерим выбор пользователя
+// Функция рендера выбранных нитей
 function renderSelection() {
   selectionEl.innerHTML = "";
   selected.forEach(i => {
@@ -44,6 +50,23 @@ function renderSelection() {
     selectionEl.appendChild(box);
   });
 }
+
+// Обработка клика по "Добавить нить"
+addThreadBtn.addEventListener("click", () => {
+  const brand = prompt("Введите название фирмы (brand):");
+  if (!brand) return;
+  const code = prompt("Введите код нити:");
+  if (!code) return;
+  const description = prompt("Введите описание (description):");
+  if (description === null) return;
+  const hex = prompt("Введите HEX‑цвет (например #ff0000):");
+  if (!hex || !/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(hex.trim())) {
+    alert("Неверный формат HEX‑цвета.");
+    return;
+  }
+  threads.push({ brand, code, description, hex: hex.trim() });
+  renderThreads();
+});
 
 // Инициализация
 renderThreads();
