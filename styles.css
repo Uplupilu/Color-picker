@@ -61,6 +61,7 @@ h1, h2 {
   margin: 20px 0;
 }
 
+/* Контрол толщины кисти */
 .thickness-control {
   display: flex;
   align-items: center;
@@ -85,12 +86,12 @@ h1, h2 {
 /* Контейнер для canvas */
 .canvas-container {
   width: 100%;
-  height: 300px;        /* можно менять под свои нужды */
+  height: 300px;        /* при необходимости можно изменить */
   position: relative;
   margin-bottom: 40px;
 }
 
-/* Canvas занимает всю область контейнера */
+/* Canvas во всю рамку контейнера */
 #rod-canvas {
   position: absolute;
   top: 0; left: 0;
