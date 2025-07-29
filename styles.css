@@ -70,6 +70,7 @@ h1, h2 {
 
 /* Canvas точно во всю рамку контейнера */
 /* box-sizing: border-box включит бордюр в общую ширину/высоту */
+/* вместо background-size: contain; */
 #rod-canvas {
   position: absolute;
   top: 0; left: 0;
@@ -78,7 +79,11 @@ h1, h2 {
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 8px;
+
   background: url('rod.jpg') no-repeat center;
-  background-size: contain;
+  /* растягиваем картинку по X и по Y под размеры контейнера */
+  background-size: 100% auto;
+
   cursor: crosshair;
 }
+
