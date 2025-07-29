@@ -48,3 +48,26 @@ h1, h2 {
   height: 40px;
   border: 2px solid #999;
 }
+
+/* ...существующие стили... */
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#rod-canvas {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background: url('rod.png') no-repeat center; /* ваше изображение “палок” */
+  background-size: contain;
+  cursor: crosshair;
+}
