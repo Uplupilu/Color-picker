@@ -67,7 +67,8 @@ h1, h2 {
 #rod-canvas {
   border: 2px solid #ccc;
   border-radius: 8px;
-  background: url('rod.png') no-repeat center; /* ваше изображение “палок” */
+  /* подложка: ваше фото палки */
+  background: url('rod.jpg') no-repeat center;
   background-size: contain;
   cursor: crosshair;
 }
