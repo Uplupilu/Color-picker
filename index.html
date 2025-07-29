@@ -15,12 +15,17 @@
 
   <!-- Панель инструментов -->
   <div class="toolbar">
-    <input type="color" id="brush-color" value="#ff0000" />
+    <div class="thickness-control">
+      <button id="thickness-minus" title="Уменьшить толщину">−</button>
+      <span id="brush-size-value">10</span>
+      <button id="thickness-plus"  title="Увеличить толщину">+</button>
+    </div>
+    <input type="color" id="brush-color" value="#ff0000" title="Цвет кисти" />
     <button id="brush-btn">Кисточка</button>
     <button id="clear-btn">Очистить</button>
   </div>
 
-  <!-- Контейнер с адаптивным canvas -->
+  <!-- Контейнер с canvas -->
   <div class="canvas-container">
     <canvas id="rod-canvas"></canvas>
   </div>
