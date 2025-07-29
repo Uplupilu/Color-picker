@@ -1,65 +1,55 @@
 // main.js
 
-// Данные нитей из colors.js
-// const threads = [ ... ];
+// Массив нитей (импортируется из colors.js)
+//
+// const threads = [
+//   { brand, code, description, hex }, ...
+// ];
 
-// Контейнеры
 const listEl       = document.getElementById("thread-list");
-const selectionEl  = document.getElementById("selection");
 const addThreadBtn = document.getElementById("add-thread-btn");
+const colorPicker  = document.getElementById("brush-color");
 
-// Массив для выбранных нитей
-let selected = [];
+let selectedIndex = null;
 
-// Функция рендера списка нитей
+// Рендерим все нитки
 function renderThreads() {
   listEl.innerHTML = "";
-  threads.forEach((thread, index) => {
+  threads.forEach((thread, idx) => {
     const card = document.createElement("div");
     card.className = "card";
+    if (idx === selectedIndex) card.classList.add("selected");
 
+    // цветное поле
     const colorBox = document.createElement("div");
     colorBox.className = "color-box";
     colorBox.style.backgroundColor = thread.hex;
     card.appendChild(colorBox);
 
+    // инфо
     const info = document.createElement("div");
     info.innerHTML = `<strong>${thread.brand}</strong><br>Код: ${thread.code}`;
     card.appendChild(info);
 
+    // клик — выбрать **одну** нить и установить цвет кисти
     card.onclick = () => {
-      const idx = selected.indexOf(index);
-      if (idx === -1) selected.push(index);
-      else selected.splice(idx, 1);
-      renderSelection();
+      selectedIndex = idx;
+      colorPicker.value = thread.hex;
+      renderThreads();
     };
 
     listEl.appendChild(card);
   });
 }
 
-// Функция рендера выбранных нитей
-function renderSelection() {
-  selectionEl.innerHTML = "";
-  selected.forEach(i => {
-    const thread = threads[i];
-    const box = document.createElement("div");
-    box.className = "color-box";
-    box.style.backgroundColor = thread.hex;
-    box.title = `${thread.brand} ${thread.code}`;
-    selectionEl.appendChild(box);
-  });
-}
-
-// Обработка клика по "Добавить нить"
+// Добавление новой нити через prompt
 addThreadBtn.addEventListener("click", () => {
-  const brand = prompt("Введите название фирмы (brand):");
+  const brand       = prompt("Название фирмы (brand):");
   if (!brand) return;
-  const code = prompt("Введите код нити:");
+  const code        = prompt("Код нити:");
   if (!code) return;
-  const description = prompt("Введите описание (description):");
-  if (description === null) return;
-  const hex = prompt("Введите HEX‑цвет (например #ff0000):");
+  const description = prompt("Описание (description):") || "";
+  const hex         = prompt("HEX‑цвет (#rrggbb):");
   if (!hex || !/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(hex.trim())) {
     alert("Неверный формат HEX‑цвета.");
     return;
@@ -70,4 +60,3 @@ addThreadBtn.addEventListener("click", () => {
 
 // Инициализация
 renderThreads();
-renderSelection();
