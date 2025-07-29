@@ -1,3 +1,4 @@
+/* Общие стили */
 body {
   font-family: sans-serif;
   padding: 20px;
@@ -8,6 +9,7 @@ h1, h2 {
   text-align: center;
 }
 
+/* Сетка карточек нитей */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -35,6 +37,7 @@ h1, h2 {
   margin-bottom: 10px;
 }
 
+/* Секция выбранных нитей */
 .selection {
   display: flex;
   gap: 10px;
@@ -49,8 +52,7 @@ h1, h2 {
   border: 2px solid #999;
 }
 
-/* ...существующие стили... */
-
+/* Панель инструментов рисования */
 .toolbar {
   display: flex;
   gap: 10px;
@@ -58,16 +60,21 @@ h1, h2 {
   margin: 20px 0;
 }
 
+/* Контейнер для canvas */
 .canvas-container {
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  /* высота контейнера, можно менять под ваши нужды */
+  height: 300px;
+  position: relative;
   margin-bottom: 40px;
 }
 
+/* Canvas занимает всю область контейнера */
 #rod-canvas {
-  width: 100%;        /* будет занимать всю ширину контейнера */
-  max-width: 1200px;  /* (опционально) не больше 1200px */
-  height: 200px;      /* высота фиксирована, или тоже адаптивно */
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
   border: 2px solid #ccc;
   border-radius: 8px;
   background: url('rod.jpg') no-repeat center;
