@@ -1,4 +1,5 @@
-// Массив нитей: бренды, коды, описания и HEX‑цвета
+// colors.js
+
 const threads = [
   {
     brand: "PROWRAP METALLIC",
@@ -25,3 +26,6 @@ const threads = [
     hex: "#00cccc"
   }
 ];
+
+// экспортируем в глобальную переменную
+window.threads = threads;
