@@ -11,9 +11,9 @@ const sizeDisplay    = document.getElementById('brush-size-value');
 
 let painting    = false;
 let brushActive = false;
-let brushSize   = 10;   // начальная толщина
+let brushSize   = 10;
 
-// Синхронизируем внутренний размер canvas с его CSS-размером
+// Подгоняем внутренний буфер канваса под его CSS‑размер
 function resizeCanvas() {
   const w = canvas.clientWidth;
   const h = canvas.clientHeight;
@@ -24,25 +24,25 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
-// Кнопка минус — уменьшаем толщину
+// Уменьшаем толщину
 minusBtn.addEventListener('click', () => {
   brushSize = Math.max(1, brushSize - 1);
   sizeDisplay.textContent = brushSize;
 });
 
-// Кнопка плюс — увеличиваем толщину
+// Увеличиваем толщину
 plusBtn.addEventListener('click', () => {
-  brushSize = brushSize + 1;
+  brushSize++;
   sizeDisplay.textContent = brushSize;
 });
 
-// Переключаем режим кисточки
+// Включаем/выключаем кисточку
 brushBtn.addEventListener('click', () => {
   brushActive = !brushActive;
   brushBtn.textContent = brushActive ? 'Кисточка: Вкл' : 'Кисточка: Выкл';
 });
 
-// Очистка рисунка (только то, что нарисовано)
+// Очистка
 clearBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
@@ -58,14 +58,14 @@ canvas.addEventListener('mousedown', (e) => {
   ctx.moveTo(e.offsetX, e.offsetY);
 });
 
-// Рисуем при движении мыши
+// Рисуем по движению мыши
 canvas.addEventListener('mousemove', (e) => {
   if (!painting) return;
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
 });
 
-// Завершение штриха
+// Завершаем штрих
 ['mouseup','mouseleave'].forEach(evt =>
   canvas.addEventListener(evt, () => painting = false)
 );
