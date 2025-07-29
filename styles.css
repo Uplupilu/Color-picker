@@ -55,22 +55,42 @@ h1, h2 {
 /* Панель инструментов рисования */
 .toolbar {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
   justify-content: center;
   margin: 20px 0;
+}
+
+.thickness-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.thickness-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#brush-size-value {
+  display: inline-block;
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* Контейнер для canvas */
 .canvas-container {
   width: 100%;
-  height: 300px;        /* тут можно менять высоту по необходимости */
+  height: 300px;        /* можно менять под свои нужды */
   position: relative;
   margin-bottom: 40px;
 }
 
-/* Canvas точно во всю рамку контейнера */
-/* box-sizing: border-box включит бордюр в общую ширину/высоту */
-/* вместо background-size: contain; */
+/* Canvas занимает всю область контейнера */
 #rod-canvas {
   position: absolute;
   top: 0; left: 0;
@@ -79,11 +99,7 @@ h1, h2 {
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 8px;
-
   background: url('rod.jpg') no-repeat center;
-  /* растягиваем картинку по X и по Y под размеры контейнера */
   background-size: 100% 100%;
-
   cursor: crosshair;
 }
-
