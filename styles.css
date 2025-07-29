@@ -82,7 +82,7 @@ h1, h2 {
 
   background: url('rod.jpg') no-repeat center;
   /* растягиваем картинку по X и по Y под размеры контейнера */
-  background-size: 1200px auto;
+  background-size: 100% 100%;
 
   cursor: crosshair;
 }
