@@ -65,9 +65,11 @@ h1, h2 {
 }
 
 #rod-canvas {
+  width: 100%;        /* будет занимать всю ширину контейнера */
+  max-width: 1200px;  /* (опционально) не больше 1200px */
+  height: 200px;      /* высота фиксирована, или тоже адаптивно */
   border: 2px solid #ccc;
   border-radius: 8px;
-  /* подложка: ваше фото палки */
   background: url('rod.jpg') no-repeat center;
   background-size: contain;
   cursor: crosshair;
