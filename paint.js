@@ -1,4 +1,4 @@
-// paint.js
+// paint.js — без изменений
 
 const canvas         = document.getElementById('rod-canvas');
 const ctx            = canvas.getContext('2d');
@@ -13,7 +13,6 @@ let painting    = false;
 let brushActive = false;
 let brushSize   = 10;
 
-// Подгоняем внутренний буфер канваса под его CSS‑размер
 function resizeCanvas() {
   const w = canvas.clientWidth;
   const h = canvas.clientHeight;
@@ -24,31 +23,25 @@ function resizeCanvas() {
 window.addEventListener('load', resizeCanvas);
 window.addEventListener('resize', resizeCanvas);
 
-// Уменьшаем толщину
 minusBtn.addEventListener('click', () => {
   brushSize = Math.max(1, brushSize - 1);
   sizeDisplay.textContent = brushSize;
 });
-
-// Увеличиваем толщину
 plusBtn.addEventListener('click', () => {
   brushSize++;
   sizeDisplay.textContent = brushSize;
 });
 
-// Включаем/выключаем кисточку
 brushBtn.addEventListener('click', () => {
   brushActive = !brushActive;
   brushBtn.textContent = brushActive ? 'Кисточка: Вкл' : 'Кисточка: Выкл';
 });
 
-// Очистка
 clearBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-// Начало штриха
-canvas.addEventListener('mousedown', (e) => {
+canvas.addEventListener('mousedown', e => {
   if (!brushActive) return;
   painting = true;
   ctx.beginPath();
@@ -58,14 +51,12 @@ canvas.addEventListener('mousedown', (e) => {
   ctx.moveTo(e.offsetX, e.offsetY);
 });
 
-// Рисуем по движению мыши
-canvas.addEventListener('mousemove', (e) => {
+canvas.addEventListener('mousemove', e => {
   if (!painting) return;
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
 });
 
-// Завершаем штрих
 ['mouseup','mouseleave'].forEach(evt =>
   canvas.addEventListener(evt, () => painting = false)
 );
