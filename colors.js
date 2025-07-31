@@ -301,7 +301,225 @@ const threads = [
     code: "NEON GRN-503",
     description: "100M",
     hex: "#39FF14"
+  },
+    // Prowrap Metallic 100 Yards
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "YELLOW GOLD-9100",
+    description: "100 Yards",
+    hex: "#d4af37"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GOLD LEAF-9110",
+    description: "100 Yards",
+    hex: "#ecd66b"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GOLDENROD-9120",
+    description: "100 Yards",
+    hex: "#daa520"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GOLD-9130",
+    description: "100 Yards",
+    hex: "#ffd700"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GOLDUST-9140",
+    description: "100 Yards",
+    hex: "#f3e5ab"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BRIGHT COPPER-9150",
+    description: "100 Yards",
+    hex: "#b87333"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "PALE GOLD-9160",
+    description: "100 Yards",
+    hex: "#e6be8a"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "CALCUTTA GOLD-9170",
+    description: "100 Yards",
+    hex: "#bdb76b"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "RED-9300",
+    description: "100 Yards",
+    hex: "#ff0000"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "AQUA-9410",
+    description: "100 Yards",
+    hex: "#00ffff"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "ICE BLUE-9420",
+    description: "100 Yards",
+    hex: "#ccf2ff"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "TURQUOISE-9440",
+    description: "100 Yards",
+    hex: "#40e0d0"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "DEEP BLUE-9460",
+    description: "100 Yards",
+    hex: "#00008b"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BLUEFIN-9470",
+    description: "100 Yards",
+    hex: "#002f6c"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "LIME-9510",
+    description: "100 Yards",
+    hex: "#00ff00"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GREEN-9520",
+    description: "100 Yards",
+    hex: "#008000"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "FOREST GREEN-9530",
+    description: "100 Yards",
+    hex: "#228b22"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "SHAMROCK-9540",
+    description: "100 Yards",
+    hex: "#33cc33"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "PURPLE-9600",
+    description: "100 Yards",
+    hex: "#800080"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "FUCHSIA-9610",
+    description: "100 Yards",
+    hex: "#ff00ff"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "MAUVE-9620",
+    description: "100 Yards",
+    hex: "#e0b0ff"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "LAVENDER-9630",
+    description: "100 Yards",
+    hex: "#e6e6fa"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BURGUNDY-9640",
+    description: "100 Yards",
+    hex: "#800020"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "COPPER-9710",
+    description: "100 Yards",
+    hex: "#b87333"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "RED COPPER-9720",
+    description: "100 Yards",
+    hex: "#d98719"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BRASS-9730",
+    description: "100 Yards",
+    hex: "#b5a642"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BROWN-9740",
+    description: "100 Yards",
+    hex: "#8b4513"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BRONZE-9750",
+    description: "100 Yards",
+    hex: "#cd7f32"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BLACK-9800",
+    description: "100 Yards",
+    hex: "#000000"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "GUNSMOKE-9820",
+    description: "100 Yards",
+    hex: "#828282"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "PEWTER-9830",
+    description: "100 Yards",
+    hex: "#96a8a1"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "SILVERBACK-9840",
+    description: "100 Yards",
+    hex: "#a9a9a9"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "BLUE STEEL-9850",
+    description: "100 Yards",
+    hex: "#4682b4"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "SILVER M-9860",
+    description: "100 Yards",
+    hex: "#c0c0c0"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "STEEL GREY-9870",
+    description: "100 Yards",
+    hex: "#8e9a9a"
+  },
+  {
+    brand: "PROWRAP METALLIC 100 Yards",
+    code: "PEARL-9880",
+    description: "100 Yards",
+    hex: "#f0ead6"
   }
+
 
 ];
 
