@@ -599,6 +599,106 @@ const threads = [
   { brand: "PROWRAP Nylon 100 Yards - Size A", code: "SLATE-077",     description: "100 Yards", hex: "#708090" },
   { brand: "PROWRAP Nylon 100 Yards - Size A", code: "PEWTR-078",     description: "100 Yards", hex: "#bfc1c2" },
   { brand: "PROWRAP Nylon 100 Yards - Size A", code: "SMOKEY-079",    description: "100 Yards", hex: "#738678" },
+    // Prowrap Nylon 100Y A – 90 цветов (вставьте в конец массива threads)
+  { brand: "PROWRAP Nylon 100Y A", code: "101-Yellofin",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "110-Bananasplit",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "119-Taxi Cab",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "122-Neon Yellow",   description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "207-Gold Fish",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "213-Clay",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "216-Tangerine",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "225-Neon Orange",  description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "301-Bubblegum",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "307-Fuchsia",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "313-Rose",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "316-Raspberry",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "325-Fire Red",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "331-Mars Red",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "337-Cranberry",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "343-Burgundy",     description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "349-Merlot",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "361-Neon Pink",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "404-Teal",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "407-Cool Mint",    description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "413-Island Lagoon", description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "416-Denim",        description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "422-Bluegill",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "425-Blue Suede",   description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "428-Summer Sky",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "431-Tidal Pool",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "434-Maui Surf",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "440-Cool Azul",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "446-Regal Blue",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "449-Wild Blueberry", description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "455-Cobalt",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "464-Blurple",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "470-Blue Marlin",  description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "479-Gulfstream",   description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "484-Deep Sea",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "501-Kiwi",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "507-Pea Soup",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "510-Sage",         description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "513-Guacamole",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "519-Rainforest",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "525-Oak Leaf",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "528-Jade",         description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "537-Fern",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "543-Evergreen",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "552-Neon Green",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "558-Olive",        description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "561-Desert Camo",  description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "567-Taupe",        description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "601-Pale Lavender",description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "607-Lilac",        description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "610-Orchid",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "613-Plum",         description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "619-Violet",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "625-Grape",        description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "631-Purple",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "634-Amethyst",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "640-Purple Heart", description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "701-Rattan",       description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "704-Midas Gold",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "710-Bees Wax",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "713-Sunset",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "716-Teak",         description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "722-Almond",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "728-Desert Sand",  description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "740-Copper",       description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "749-Brown",        description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "755-Chesnut",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "767-Chocolate",    description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "807-White",        description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "813-Silver Shiner",description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "819-Ghost Grey",   description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "822-Silver Smoke", description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "825-Tin Can",      description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "831-Smoke Screen",description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "836-Forged Steel", description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "841-Iron Ore",     description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "850-Storm Cloud",  description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "856-Soot",         description: "100Y", hex: "" },
+
+  { brand: "PROWRAP Nylon 100Y A", code: "860-Night Shade",  description: "100Y", hex: "" },
+  { brand: "PROWRAP Nylon 100Y A", code: "862-Twilight Black",description: "100Y", hex: "" },
+
 
 
 
