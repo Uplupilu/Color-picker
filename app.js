@@ -1,10 +1,12 @@
 // app.js
-
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== DOM-элементы (база нитей) =====
   const threadsArray = threads;   // из colors.js
   const listEl       = document.getElementById("thread-list");
   const addBtn       = document.getElementById("add-thread-btn");
   const delBtn       = document.getElementById("delete-thread-btn");
+
+  // ===== DOM-элементы (рисовалка) =====
   const colorPicker  = document.getElementById("brush-color");
   const brushBtn     = document.getElementById("brush-btn");
   const clearBtn     = document.getElementById("clear-btn");
@@ -14,31 +16,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas       = document.getElementById("rod-canvas");
   const ctx          = canvas.getContext("2d");
 
+  // ===== DOM-элементы (моды: обмотки / рисовалка) — опционально =====
+  const modeWrapBtn   = document.getElementById("mode-wrap")   || null;
+  const modePaintBtn  = document.getElementById("mode-paint")  || null;
+  const createWrapBtn = document.getElementById("create-wrap") || null;
+
+  // ===== Состояние =====
   let selectedIndex = null;
   let painting      = false;
-  let brushSize     = parseInt(sizeDisp.textContent) || 10;
+  let brushSize     = parseInt(sizeDisp?.textContent || "10", 10) || 10;
   let brushActive   = true;
+  let currentMode   = modeWrapBtn && modePaintBtn ? "paint" : "paint"; // по умолчанию рисовалка
 
-  // Стартовое состояние
-  brushBtn.textContent = "Кисточка: Вкл";
-  sizeDisp.textContent = brushSize;
-  updateDeleteBtn();
+  // Стартовые подписи
+  if (brushBtn) brushBtn.textContent = "Кисточка: Вкл";
+  if (sizeDisp) sizeDisp.textContent = brushSize;
 
-  // Подгонка canvas под CSS‑размер
-  function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
-    canvas.width  = rect.width;
-    canvas.height = rect.height;
-  }
-  window.addEventListener("load", resizeCanvas);
-  window.addEventListener("resize", resizeCanvas);
-
-  // Обновляем состояние кнопки «Удалить»
+  // --- Утилиты ---
   function updateDeleteBtn() {
-    delBtn.disabled = (selectedIndex === null);
+    if (delBtn) delBtn.disabled = (selectedIndex === null);
   }
 
-  // Рендер карточек
+  function setMode(mode) {
+    currentMode = mode;
+    // подсветка табов, если есть
+    if (modeWrapBtn)  modeWrapBtn.classList.toggle("active", mode === "wrap");
+    if (modePaintBtn) modePaintBtn.classList.toggle("active", mode === "paint");
+
+    // доступность кнопки "Создать обмотку"
+    if (createWrapBtn) createWrapBtn.disabled = (mode !== "wrap");
+
+    // чтобы не рисовать в режиме обмоток
+    brushActive = (mode === "paint");
+    if (brushBtn) brushBtn.textContent = brushActive ? "Кисточка: Вкл" : "Кисточка: Выкл";
+  }
+
+  // ===== Рендер карточек нитей =====
   function renderThreads() {
     listEl.innerHTML = "";
     threadsArray.forEach((t, idx) => {
@@ -57,85 +70,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
       card.addEventListener("click", () => {
         selectedIndex = idx;
-        colorPicker.value = t.hex;
+        if (colorPicker) colorPicker.value = t.hex; // цвет кисточки под выбранную нить
         renderThreads();
         updateDeleteBtn();
+        // если режим "обмотки", разблокируем кнопку создания (если есть)
+        if (createWrapBtn && currentMode === "wrap") createWrapBtn.disabled = false;
       });
 
       listEl.appendChild(card);
     });
   }
 
-  // Добавить нить
-  addBtn.addEventListener("click", () => {
-    const brand       = prompt("Название фирмы (brand):");
-    if (!brand) return;
-    const code        = prompt("Код нити:");
-    if (!code) return;
-    const description = prompt("Описание (description):") || "";
-    let hex           = prompt("HEX‑цвет (#rrggbb):");
-    if (!hex) return;
-    hex = hex.trim();
-    if (!/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(hex)) {
-      alert("Неверный формат HEX‑цвета.");
-      return;
-    }
-    threadsArray.push({ brand, code, description, hex });
-    renderThreads();
-    updateDeleteBtn();
-  });
-
-  // Удалить нить
-  delBtn.addEventListener("click", () => {
-    if (selectedIndex === null) return;
-    threadsArray.splice(selectedIndex, 1);
-    selectedIndex = null;
-    renderThreads();
-    updateDeleteBtn();
-  });
-
-  // Уменьшить/увеличить толщину кисти
-  minusBtn.addEventListener("click", () => {
-    brushSize = Math.max(1, brushSize - 1);
-    sizeDisp.textContent = brushSize;
-  });
-  plusBtn.addEventListener("click", () => {
-    brushSize++;
-    sizeDisp.textContent = brushSize;
-  });
-
-  // Вкл/выкл кисточки
-  brushBtn.addEventListener("click", () => {
-    brushActive = !brushActive;
-    brushBtn.textContent = brushActive ? "Кисточка: Вкл" : "Кисточка: Выкл";
-  });
-
-  // Очистить канвас
-  clearBtn.addEventListener("click", () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  });
-
-  // Начало рисования
-  canvas.addEventListener("mousedown", e => {
-    if (!brushActive) return;
-    painting = true;
-    ctx.beginPath();
-    ctx.lineWidth   = brushSize;
-    ctx.lineCap     = "round";
-    ctx.strokeStyle = colorPicker.value;
-    ctx.moveTo(e.offsetX, e.offsetY);
-  });
-  // Рисуем по движению мыши
-  canvas.addEventListener("mousemove", e => {
-    if (!painting) return;
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-  });
-  // Завершение штриха
-  ["mouseup","mouseleave"].forEach(evt =>
-    canvas.addEventListener(evt, () => painting = false)
-  );
-
-  // Первый рендер
-  renderThreads();
-});
+  // ===== Добавить / Удалить нить =====
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      const brand       = prompt("Название фирмы (brand):");
+      if (!brand) return;
+      const code        = prompt("Код нити:");
+      if (!code) return;
+      const description = prompt("Описание (description):") || "";
+      let hex           = prompt("HEX-цвет (#rrggbb):");
+      if (!hex) return;
+      hex = hex.trim();
+      if (!/^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(hex)) {
+        alert("Неверный формат HEX-цвета.");
+        return;
+      }
+      threadsArray.push({ brand, code, description, hex });
+      ren
