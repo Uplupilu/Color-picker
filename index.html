@@ -8,24 +8,17 @@
 </head>
 <body>
   <h1>База нитей</h1>
+  <button id="add-thread-btn">Добавить нить</button>
   <div class="controls-base">
     <button id="add-thread-btn">Добавить нить</button>
     <button id="delete-thread-btn" disabled>Удалить нить</button>
   </div>
-
   <div id="thread-list" class="grid"></div>
 
   <h2>Сборка</h2>
+  <div id="selection" class="selection"></div>
   <div class="selection" id="selection"></div>
 
-  <!-- Панель режимов -->
-  <div class="modebar">
-    <button id="mode-wrap"  class="tab">Мод: Обмотки</button>
-    <button id="mode-paint" class="tab active">Мод: Рисовалка</button>
-    <button id="create-wrap" disabled>Создать обмотку</button>
-  </div>
-
-  <!-- Панель рисовалки -->
   <div class="toolbar">
     <div class="thickness-control">
       <button id="thickness-minus" title="Уменьшить толщину">−</button>
@@ -37,7 +30,6 @@
     <button id="clear-btn">Очистить</button>
   </div>
 
-  <!-- Поле с неизменяемым изображением "палка" (чёрная полоса) -->
   <div class="canvas-container">
     <canvas id="rod-canvas"></canvas>
   </div>
