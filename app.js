@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   // === 1. Переменные и элементы ===
-  const threadsArray = window.threads || [];
+  const threadsArray = threads; // берём прямо из colors.js
   const threadsArray = threads;   // из colors.js
   const listEl       = document.getElementById("thread-list");
   const addThreadBtn = document.getElementById("add-thread-btn");
