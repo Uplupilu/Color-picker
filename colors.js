@@ -703,76 +703,55 @@ const threads = [
 
 ];
 
-// ===== сортировка по цвету (HSL) =====
+// ===== сортировка по цвету (вставить перед window.threads = threads;) =====
+const HUE_START = 0;             // 0=красный, 60=жёлтый, 120=зелёный...
+const GRAY_SAT_THRESHOLD = 0.1;  // ниже этой S считаем цвет нейтральным
 
-// С какого оттенка начинать порядок (0 — красный, 60 — жёлтый, 120 — зелёный и т.д.)
-const HUE_START = 0;           // градусы [0..360)
-const GRAY_SAT_THRESHOLD = 0.1; // ниже этого S считаем цвет нейтральным (серым/белым/чёрным)
-
-// HEX -> {r,g,b} 0..255
-function hexToRgb(hex) {
-  const h = hex.trim();
-  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
-  if (!m) return { r: 0, g: 0, b: 0 };
-  return {
-    r: parseInt(m[1], 16),
-    g: parseInt(m[2], 16),
-    b: parseInt(m[3], 16)
-  };
+function hexToRgb01(hx) {
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hx.trim());
+  return m
+    ? { r: parseInt(m[1],16)/255, g: parseInt(m[2],16)/255, b: parseInt(m[3],16)/255 }
+    : { r: 0, g: 0, b: 0 };
 }
-
-// {r,g,b} 0..255 -> {h,s,l} где h в [0..360), s,l в [0..1]
 function rgbToHsl({ r, g, b }) {
-  let rr = r / 255, gg = g / 255, bb = b / 255;
-  const max = Math.max(rr, gg, bb), min = Math.min(rr, gg, bb);
-  let h = 0, s = 0;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
   const l = (max + min) / 2;
   const d = max - min;
-
-  if (d !== 0) {
-    s = d / (1 - Math.abs(2 * l - 1));
-    switch (max) {
-      case rr: h = ((gg - bb) / d) % 6; break;
-      case gg: h = (bb - rr) / d + 2;   break;
-      case bb: h = (rr - gg) / d + 4;   break;
-    }
+  let h = 0, s = 0;
+  if (d) {
+    s = d / (1 - Math.abs(2*l - 1));
+    if (max === r) h = ((g - b) / d) % 6;
+    else if (max === g) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
     h = (h * 60 + 360) % 360;
-  } else {
-    s = 0;
-    h = 0; // у нейтралей оттенок неважен
   }
   return { h, s, l };
 }
+const rot = (h, start) => (h - start + 360) % 360;
 
-function rotateHue(h, startDeg) {
-  // поворот так, чтобы сортировка начиналась с startDeg
-  return (h - startDeg + 360) % 360;
-}
+threads.sort((a, b) => {
+  const A = rgbToHsl(hexToRgb01(a.hex));
+  const B = rgbToHsl(hexToRgb01(b.hex));
+  const aNeutral = A.s <= GRAY_SAT_THRESHOLD;
+  const bNeutral = B.s <= GRAY_SAT_THRESHOLD;
 
-// Метрики для сортировки и компаратор
-function withColorMetrics(item) {
-  const rgb = hexToRgb(item.hex);
-  const hsl = rgbToHsl(rgb);
-  const isNeutral = hsl.s <= GRAY_SAT_THRESHOLD;
-  const hueKey = isNeutral ? 9999 : rotateHue(hsl.h, HUE_START); // нейтральные отправим в конец
-  return { ...item, _hsl: hsl, _isNeutral: isNeutral, _hueKey: hueKey };
-}
+  // 1) цветные сначала, нейтрали в конце
+  if (aNeutral !== bNeutral) return aNeutral ? 1 : -1;
 
-function colorComparator(a, b) {
-  // 1) сначала по группе (цветные -> нейтрали)
-  if (a._isNeutral !== b._isNeutral) return a._isNeutral ? 1 : -1;
-  // 2) по повернутому оттенку
-  if (a._hueKey !== b._hueKey) return a._hueKey - b._hueKey;
+  // 2) по "повёрнутому" оттенку так, чтобы старт был с HUE_START
+  const aHue = aNeutral ? 9999 : rot(A.h, HUE_START);
+  const bHue = bNeutral ? 9999 : rot(B.h, HUE_START);
+  if (aHue !== bHue) return aHue - bHue;
+
   // 3) для близких оттенков — по насыщенности (ярче раньше)
-  if (a._hsl.s !== b._hsl.s) return b._hsl.s - a._hsl.s;
-  // 4) затем по светлоте (сначала умеренные, потом очень светлые/тёмные)
-  if (a._hsl.l !== b._hsl.l) return Math.abs(0.5 - a._hsl.l) - Math.abs(0.5 - b._hsl.l);
-  // 5) стабильность: по бренду и коду
-  return (a.brand + a.code).localeCompare(b.brand + b.code, undefined, { numeric: true });
-}
+  if (A.s !== B.s) return B.s - A.s;
 
-// Сформировать отсортированный список и экспортировать
-const threadsSorted = threads.map(withColorMetrics).sort(colorComparator).map(({ _hsl, _isNeutral, _hueKey, ...t }) => t);
+  // 4) затем по светлоте — ближе к 0.5 раньше
+  if (A.l !== B.l) return Math.abs(0.5 - A.l) - Math.abs(0.5 - B.l);
+
+  // 5) стабильно по тексту
+  return (a.brand + a.code).localeCompare(b.brand + b.code, undefined, { numeric: true });
+});
 
 // экспортируем в глобальную переменную
-window.threads = threadsSorted;
+window.threads = threads;
