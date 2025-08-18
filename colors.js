@@ -703,5 +703,76 @@ const threads = [
 
 ];
 
+// ===== сортировка по цвету (HSL) =====
+
+// С какого оттенка начинать порядок (0 — красный, 60 — жёлтый, 120 — зелёный и т.д.)
+const HUE_START = 0;           // градусы [0..360)
+const GRAY_SAT_THRESHOLD = 0.1; // ниже этого S считаем цвет нейтральным (серым/белым/чёрным)
+
+// HEX -> {r,g,b} 0..255
+function hexToRgb(hex) {
+  const h = hex.trim();
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
+  if (!m) return { r: 0, g: 0, b: 0 };
+  return {
+    r: parseInt(m[1], 16),
+    g: parseInt(m[2], 16),
+    b: parseInt(m[3], 16)
+  };
+}
+
+// {r,g,b} 0..255 -> {h,s,l} где h в [0..360), s,l в [0..1]
+function rgbToHsl({ r, g, b }) {
+  let rr = r / 255, gg = g / 255, bb = b / 255;
+  const max = Math.max(rr, gg, bb), min = Math.min(rr, gg, bb);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  const d = max - min;
+
+  if (d !== 0) {
+    s = d / (1 - Math.abs(2 * l - 1));
+    switch (max) {
+      case rr: h = ((gg - bb) / d) % 6; break;
+      case gg: h = (bb - rr) / d + 2;   break;
+      case bb: h = (rr - gg) / d + 4;   break;
+    }
+    h = (h * 60 + 360) % 360;
+  } else {
+    s = 0;
+    h = 0; // у нейтралей оттенок неважен
+  }
+  return { h, s, l };
+}
+
+function rotateHue(h, startDeg) {
+  // поворот так, чтобы сортировка начиналась с startDeg
+  return (h - startDeg + 360) % 360;
+}
+
+// Метрики для сортировки и компаратор
+function withColorMetrics(item) {
+  const rgb = hexToRgb(item.hex);
+  const hsl = rgbToHsl(rgb);
+  const isNeutral = hsl.s <= GRAY_SAT_THRESHOLD;
+  const hueKey = isNeutral ? 9999 : rotateHue(hsl.h, HUE_START); // нейтральные отправим в конец
+  return { ...item, _hsl: hsl, _isNeutral: isNeutral, _hueKey: hueKey };
+}
+
+function colorComparator(a, b) {
+  // 1) сначала по группе (цветные -> нейтрали)
+  if (a._isNeutral !== b._isNeutral) return a._isNeutral ? 1 : -1;
+  // 2) по повернутому оттенку
+  if (a._hueKey !== b._hueKey) return a._hueKey - b._hueKey;
+  // 3) для близких оттенков — по насыщенности (ярче раньше)
+  if (a._hsl.s !== b._hsl.s) return b._hsl.s - a._hsl.s;
+  // 4) затем по светлоте (сначала умеренные, потом очень светлые/тёмные)
+  if (a._hsl.l !== b._hsl.l) return Math.abs(0.5 - a._hsl.l) - Math.abs(0.5 - b._hsl.l);
+  // 5) стабильность: по бренду и коду
+  return (a.brand + a.code).localeCompare(b.brand + b.code, undefined, { numeric: true });
+}
+
+// Сформировать отсортированный список и экспортировать
+const threadsSorted = threads.map(withColorMetrics).sort(colorComparator).map(({ _hsl, _isNeutral, _hueKey, ...t }) => t);
+
 // экспортируем в глобальную переменную
-window.threads = threads;
+window.threads = threadsSorted;
