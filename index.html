@@ -36,3 +36,101 @@
   <script src="app.js"></script>
 </body>
 </html>
+
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Лигатурный симулятор (vanilla JS)</title>
+<style>
+:root{
+--bg:#0b0d12;
+--panel:#12151c;
+--muted:#7b8190;
+--ring-dark:#20242d;
+--ring-black:#0a0c10;
+--ring-silver:#aeb3bd;
+--accent:#3b82f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#e7eaf1;font:500 15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+.wrap{max-width:1100px;margin:32px auto;padding:0 16px}
+h1{font:700 22px/1.2 system-ui;margin:0 0 16px}
+
+
+/* ===== PREVIEW ===== */
+.preview-card{background:linear-gradient(180deg,#0f1219, #0b0d12);border:1px solid #1c2230;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.rod-stage{position:relative;height:160px;border:1px solid #1b2230;border-radius:12px;background:radial-gradient(1200px 120px at 50% -40px,rgba(255,255,255,.12),transparent 60%)}
+.rod{position:absolute;left:24px;right:24px;top:60px;height:44px;border-radius:5px;overflow:hidden}
+
+
+/* carbon / blank finish variations via data-attr */
+.rod[data-finish="revs"]{
+background:
+repeating-linear-gradient(45deg, #151922 0px, #151922 7px, #0f131a 7px, #0f131a 14px),
+repeating-linear-gradient(-45deg,#1a1f2a 0px,#1a1f2a 7px,#111722 7px,#111722 14px);
+filter:brightness(.95);
+}
+.rod[data-finish="matte"]{ background:#0c0f14; }
+.rod[data-finish="twill"]{
+background:
+repeating-linear-gradient(135deg,#0f141c 0 6px,#0b0f16 6px 12px);
+}
+
+
+/* subtle ring framework tint (a top overlay) */
+.rod::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.45}
+.rod[data-ring="dark"]::after{background:linear-gradient(90deg,rgba(65,72,86,.35),rgba(30,34,45,.15))}
+.rod[data-ring="black"]::after{background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,.25))}
+.rod[data-ring="silver"]::after{background:linear-gradient(90deg,rgba(184,192,204,.55),rgba(120,128,140,.2))}
+
+
+/* main ligature band */
+.ligature{position:absolute;top:0;bottom:0;width:180px;left:calc(50% - 90px);display:flex;align-items:stretch;justify-content:flex-start}
+.ligature__base{position:relative;flex:1}
+/* Thread ribbing effect */
+.ligature__base::before{content:"";position:absolute;inset:0;border-left:1px solid rgba(255,255,255,.06);border-right:1px solid rgba(0,0,0,.25);background:
+linear-gradient(90deg,rgba(0,0,0,.18),transparent 18%, transparent 82%, rgba(255,255,255,.08) 100%),
+repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0px, rgba(255,255,255,.08) 2px, rgba(0,0,0,.12) 2px, rgba(0,0,0,.12) 4px);
+mix-blend-mode:overlay;opacity:.55}
+.ligature__base-inner{position:absolute;inset:0}
+
+
+/* trim bands */
+.trim{position:absolute;top:0;bottom:0;width:12px}
+.trim::before{content:"";position:absolute;inset:0;opacity:.65;background:repeating-linear-gradient(90deg,rgba(255,255,255,.2) 0 2px, rgba(0,0,0,.2) 2px 4px)}
+.trim[data-index="1"]{box-shadow:0 0 0 1px rgba(0,0,0,.35), 0 0 0 2px rgba(255,255,255,.06) inset}
+
+
+/* ===== CONTROLS ===== */
+.controls{margin-top:18px;display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.field{grid-column:span 6;background:var(--panel);border:1px solid #1a2130;border-radius:12px;padding:12px}
+.field.small{grid-column:span 4}
+.field label{display:block;font:600 13px/1.2 system-ui;color:#cfd6e6;margin-bottom:8px}
+.field .row{display:flex;gap:10px;align-items:center}
+.select, input[type="color"], input[type="range"], input[type="number"], input[type="text"]{width:100%}
+.select, input[type="text"], input[type="number"]{appearance:none;border:1px solid #2a3145;background:#0f1320;color:#e8edf7;border-radius:10px;padding:9px 12px}
+input[type="color"]{height:36px;border:1px solid #2a3145;background:#0f1320;border-radius:10px;padding:0}
+input[type="range"]{height:36px}
+.muted{color:var(--muted);font-size:12px}
+
+
+.trim-controls{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+.trim-controls .field{grid-column:span 4}
+
+
+@media (max-width:880px){
+.controls{grid-template-columns:repeat(6,1fr)}
+.field{grid-column:span 6}
+.trim-controls{grid-template-columns:repeat(6,1fr)}
+.trim-controls .field{grid-column:span 6}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>SIMULATE YOUR LIGATURE</h1>
+<div class="preview-card">
+<div class="rod-stage">
+</html>
